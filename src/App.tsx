@@ -13,7 +13,7 @@ function App() {
   }
   const handleClick = (event: React.MouseEvent<HTMLButtonElement>) =>{
     event.preventDefault()
-    setTodoList([{text: todo, completed: false}, ...todoList])
+    setTodoList([...todoList, {text: todo}])
     setTodo("")
   }
   return (
@@ -47,8 +47,8 @@ function App() {
         </form>
         <div>
           <ul className="toDoList">
-            {todoList?.map((item) => (
-              <TodoListItem text={item?.text} completed={item?.completed} />
+            {todoList?.map((item, index) => (
+              <TodoListItem text={item?.text} key={index} completed={item?.completed} />
             ))}
           </ul>
         </div>
