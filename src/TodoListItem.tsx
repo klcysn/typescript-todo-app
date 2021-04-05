@@ -1,11 +1,5 @@
 import React, { useState } from "react"
-
-interface Todo {
-    text: string;
-    completed: boolean;
-}
-
-
+import {Todo} from "./types"
 
 const TodoListItem: React.FC<Todo> = ({text, completed}) =>{
     const [check, setCheck] = useState(false)
