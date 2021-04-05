@@ -1,24 +1,27 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, { useState } from 'react';
 import './App.css';
+import TodoListItem from "./TodoListItem"
+
 
 function App() {
+  const [todoList, setTodoList] = useState([{text: "yemek", completed: false}])
+  const [todo, setTodo] = useState<string>("")
+
+  const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) =>{
+    event.preventDefault()
+    setTodo(event.target.value)
+  }
+  const handleClick = (event: React.MouseEvent<HTMLButtonElement>) =>{
+    event.preventDefault()
+    setTodoList([{text: todo, completed: false}, ...todoList])
+  }
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <input type="text" onChange={handleInputChange} />
+      <button onClick={handleClick}>Add</button>
+      {
+       todoList?.map((item)=> <TodoListItem text ={item.text} completed={item.completed} />) 
+      }
     </div>
   );
 }
